@@ -1,9 +1,11 @@
 import pyodbc
 
 class Integrador_SQL:
-    def __init__(self, nome_banco):
+    def __init__(self, nome_banco, arquivos):
         self.nome_banco = nome_banco
-        self.dados_conexao = "Driver={SQL Server};Server=DESKTOP-R8REUHE;"
+        server = arquivos.ler_arq("infos.txt")[0].split("=")[1][:-1]
+        self.dados_conexao = "Driver={SQL Server};"
+        self.dados_conexao += "Server={};".format(server)
         self.dados_conexao += "Database={0};".format(self.nome_banco)
         self.conexao = pyodbc.connect(self.dados_conexao)
         self.tabelas = []

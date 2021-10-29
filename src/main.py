@@ -1,6 +1,7 @@
 import eco
 import dados
 import ambiente
+import arquivos
 import integracao_sql as isq
 import implementar_barreira as imb
 import implementar_interface as imi
@@ -19,13 +20,20 @@ def iniciar_pops(mundo):
 def main():
     dimensoes = [500, 500]
     dimensoes_janela = [900, 500]
-    integrador = isq.Integrador_SQL("Ecos")
+    arq = arquivos.Arquivos()
+    try:
+        integrador = isq.Integrador_SQL("Ecos", arq)
+    
+    except:
+        integrador = ""
+        print("integrador nao encontrado, informe outro")
+
     da = dados.Dados([], integrador)
     amb = ambiente.Ambiente(dimensoes, [], da)
     barreira = imb.main([0, dimensoes[0]], [0, dimensoes[1]], "i")
     amb.add_barreiras([barreira])
     iniciar_pops(amb)
-    janela = imi.main(dimensoes_janela, amb, da)
+    janela = imi.main(dimensoes_janela, amb, da, arq)
     amb.janela = janela
     janela.main_loop()
 
