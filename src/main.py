@@ -7,6 +7,8 @@ import implementar_barreira as imb
 import implementar_interface as imi
 
 def iniciar_pops(mundo):
+    """recebe um objeto Ambiente, cria objetos Eco (individuos) e adiciona esses
+    individuos no ambiente"""
     pops = []
     n = 0
     for _ in range(10):
@@ -18,19 +20,21 @@ def iniciar_pops(mundo):
     mundo.add_pops(pops)
 
 def main():
+    """cria os objetos iniciais do programa. se o integrador não puder ser criado, o programa
+    ainda abrirá a interface."""
     dimensoes = [500, 500]
     dimensoes_janela = [900, 500]
     arq = arquivos.Arquivos()
-    try:
+    try: # tenta criar o integrador
         integrador = isq.Integrador_SQL("Ecos", arq)
     
     except:
         integrador = ""
-        print("integrador nao encontrado, informe outro")
+        print("integrador nao encontrado, informe outro servidor")
 
     da = dados.Dados([], integrador)
     amb = ambiente.Ambiente(dimensoes, [], da)
-    barreira = imb.main([0, dimensoes[0]], [0, dimensoes[1]], "i")
+    barreira = imb.main([0, dimensoes[0]], [0, dimensoes[1]], "e")
     amb.add_barreiras([barreira])
     iniciar_pops(amb)
     janela = imi.main(dimensoes_janela, amb, da, arq)

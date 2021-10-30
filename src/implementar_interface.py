@@ -8,27 +8,35 @@ def exemplo(**kwargs):
 
 
 def receber_dados(**kwargs):
+    """função para um botão. coleta o intervalo e os individuos dos respectivos
+    input da interface. recebe um dicionario {'janela': objeto Janela,
+    'dados': objeto Dados}. colhe informações referentes no banco de dados e
+    plota graficos com as informações colhidas"""
     janela = kwargs["janela"]
     dados = kwargs["dados"]
     inter = ""
     pops = ""
-    for input in janela.inputs:
+    for input in janela.inputs: # buscando o conteudo dos inputs
         if input.nome == "inter":
             inter = input.input
         
         elif input.nome == "pops":
             pops = input.input
     
-    da = dados.receber_dados_SQL(**{"inter":inter, "pops":pops})
+    da = dados.receber_dados_SQL(**{"inter":inter, "pops":pops}) # recebendo dados do banco
     gr = grafico.Grafico_Vetores(da[0])
     gr.add_vetores(da[1])
     gr.plotar()
 
 
 def atualizar_infos(**kwargs):
+    """função para um botão. coleta o nome do server colocado em um input
+    da interface. recebe um dicionario {'janela': objeto Janela,
+    'arquivos': objeto Arquivos}. atualiza o arquivo 'infos.txt' sobre o
+    server para acessar o banco de dados"""
     janela = kwargs["janela"]
     arquivos = kwargs["arquivos"]
-    for input in janela.inputs:
+    for input in janela.inputs: # buscando o input
         if input.nome == "server":
             texto = input.input
     
@@ -36,7 +44,8 @@ def atualizar_infos(**kwargs):
     arquivos.refazer_arq("infos.txt", texto)
 
 
-def texto_ajuda():
+def texto_ajuda()-> str:
+    """retorna o texto de ajuda a ser exposto na interface"""
     conteudo = ""
     conteudo += "informe o server local a ser conectado\n"
     conteudo += "pelo SQL. para usar as alterações\n"
@@ -47,6 +56,9 @@ def texto_ajuda():
 
 
 def atualizar_texto(**kwargs):
+    """função para um botão. atualiza o conteudo de um texto na interface.
+    recebe um dicionario {'janela': objeto Janela, 'texto': string a ser
+    apresentada, 'nome': nome do objeto Texto}"""
     janela = kwargs["janela"]
     texto = kwargs["texto"]
     nome = kwargs["nome"]

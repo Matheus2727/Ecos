@@ -28,15 +28,21 @@ class Grafico_Equa:
 
 
 class Grafico_Vetores:
+    # trabalha com listas de valores para plotar os graficos
     def __init__(self, vetor_x):
+        """recebe uma lista para servir como eixo x"""
         self.vetores_y = {}
         self.vetor_x = vetor_x
     
     def add_vetores(self, vetores_y:dict):
+        """adiciona um dicionario de listas, cujas chaves são os nomes
+        representados na legenda do grafico. as listas devem ter o mesmo
+        tamanho que o eixo x"""
         for nome, vetor in vetores_y.items():
             self.vetores_y[nome] = vetor
            
     def plotar(self):
+        """plota o grafico do eixo x com cada lista dos vetores y"""
         _, ax = plt.subplots()
         vx = self.vetor_x
         for nome, vy in self.vetores_y.items():
