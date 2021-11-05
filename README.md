@@ -1,6 +1,6 @@
 # Ecos
 
-> O objetivo do projeto é coletar as posições de indivíduos em uma simulação e registrá-las em um banco da dados, com opções de visualização.
+> O objetivo do projeto é rodar uma simulação de indivíduos no espaço dado e coletar dados relevantes de tais indivíduos para análise futura. Atualmente o espaço e os indivíduos não têm caracteristicas suficientes para qualquer análise complexa, mas o programa está equipado com a base para gerenciamento e visualização de dados.
 
 ## Objetivos futuros:
 
