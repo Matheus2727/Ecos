@@ -64,9 +64,9 @@ class Ambiente:
         """chama a função 'mover' de cada individuo no ambiente, passando como
         parametro uma direção aleatoria"""
         import random
-        opt = ["up", "down", "left", "right"]
+        opt = range(628)
         for pop in self.pops["eco"]:
-            dir = random.choice(opt)
+            dir = random.choice(opt)/100
             pop.mover(dir)
     
     def mudar_pause(self):
